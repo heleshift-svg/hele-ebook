@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="مرحاب محمد هاشمي - Merhab Mohammed Hachemi">
+    <meta name="copyright" content="جميع الحقوق محفوظة للمبتكر مرحاب محمد هاشمي © 2026">
+    <meta name="description" content="المذكرة التقنية لابتكار HELE - إعداد مرحاب محمد هاشمي">
+    
+    <title>HELE - المذكرة التقنية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #000000; --bg-grad: #121212;
+            --glass: rgba(226, 232, 240, 0.06); --glass-border: rgba(255, 255, 255, 0.15); --glass-hover: rgba(226, 232, 240, 0.12);
+            --primary: #ffffff; --accent: #cbd5e1;  
+            --text-main: #f8fafc; --text-sub: #94a3b8;  
+        }
+        
+        /* طبقة حماية وتوافق مع الهواتف القديمة */
+        * { 
+            box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; 
+            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body { 
+            background: var(--bg); 
+            background-image: radial-gradient(circle at 100% 0%, var(--bg-grad) 0%, transparent 50%), radial-gradient(circle at 0% 100%, #080808 0%, transparent 50%); 
+            background-attachment: fixed; color: var(--text-main); display: flex; flex-direction: column; align-items: center; 
+        }
+        
+        .scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,0.05); z-index: 1000; }
+        .scroll-progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.1s ease; }
+        .container { width: 100%; max-width: 900px; padding: 0 20px; display: flex; flex-direction: column; gap: 60px; margin-bottom: 80px; }
+
+        .cover-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .cover-logo { margin-bottom: 30px; animation: float 4s ease-in-out infinite; -webkit-animation: float 4s ease-in-out infinite; }
+        
+        @-webkit-keyframes float { 0% { -webkit-transform: translateY(0px); } 50% { -webkit-transform: translateY(-15px); } 100% { -webkit-transform: translateY(0px); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+        .cover-section h1 { font-size: 60px; font-weight: 900; background: -webkit-linear-gradient(45deg, var(--primary), var(--text-sub)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
+        .cover-section h2 { font-size: 24px; color: var(--text-sub); font-weight: 600; margin-bottom: 30px; max-width: 700px; line-height: 1.5; }
+        .scroll-indicator { color: var(--text-sub); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6; animation: bounce 2s infinite; -webkit-animation: bounce 2s infinite; margin-top: 50px;}
+        
+        @-webkit-keyframes bounce { 0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 40% {-webkit-transform: translateY(10px);} 60% {-webkit-transform: translateY(5px);} }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(10px);} 60% {transform: translateY(5px);} }
+
+        .section-header { border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 30px; }
+        .section-header h2 { color: var(--primary); font-weight: 800; font-size: 28px; display: flex; align-items: center; gap: 12px; }
+
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .full-width { grid-column: span 2; }
+
+        .card { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--glass-hover); box-shadow: 0 10px 30px rgba(255,255,255,0.05); }
+        .card-icon { font-size: 32px; margin-bottom: 20px; display: inline-flex; align-items: center; justify-content: center; padding: 14px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--accent); }
+
+        h3 { font-size: 22px; margin-bottom: 15px; color: var(--primary); font-weight: 700; }
+        p { font-size: 16px; line-height: 1.8; color: var(--text-sub); margin-bottom: 15px; text-align: justify; }
+        
+        .bullet-list { margin-inline-start: 20px; color: var(--text-sub); line-height: 1.8; list-style: none; }
+        .bullet-list li { position: relative; margin-bottom: 12px; padding-right: 25px; }
+        .bullet-list li::before { content: "\e5ca"; font-family: 'Material Symbols Rounded'; position: absolute; right: 0; color: var(--primary); font-size: 18px; }
+
+        .formula-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; font-family: monospace; border: 1px dashed var(--glass-border); text-align: left; direction: ltr; margin-top: 15px; color: var(--accent); font-size: 15px;}
+        .highlight { color: var(--primary); font-weight: 700; }
+
+        .qa-card { display: flex; flex-direction: column; gap: 10px; }
+        .qa-question { font-size: 18px; color: var(--primary); font-weight: 800; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; line-height: 1.5; }
+        .qa-answer { font-size: 15px; line-height: 1.8; color: var(--text-sub); background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 12px; border-right: 3px solid var(--accent); text-align: justify; }
+        .qa-answer strong { color: var(--accent); }
+
+        .conclusion { text-align: center; padding: 40px 20px; margin-top: 20px; border-top: 1px solid var(--glass-border); }
+        .conclusion h3 { font-size: 26px; font-weight: 900; letter-spacing: 1px; color: var(--primary); margin-bottom: 10px; }
+        .conclusion p { font-size: 18px; color: var(--text-sub); font-weight: 600; }
+        .copyright-tag { display: inline-block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 30px; margin-top: 20px; font-size: 14px; font-weight: 700; color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; display: block; }
+            .card { margin-bottom: 25px; }
+            .cover-section h1 { font-size: 42px; }
+            .cover-section h2 { font-size: 18px; padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress"><div class="scroll-progress-bar" id="progressBar"></div></div>
+
+    <div class="container">
+        
+        <section class="cover-section">
+            <svg class="cover-logo" viewBox="0 0 100 80" width="140" height="140" style="filter: drop-shadow(0px 8px 16px rgba(255,255,255,0.1)); overflow: visible;">
+                <path d="M 35,65 C 15,65 10,40 30,30 C 35,5 75,5 80,30 C 100,40 95,65 75,65" fill="none" stroke="var(--primary)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="55" cy="65" r="11" fill="var(--accent)"/>
+            </svg>
+            <h1>HELE SYSTEM</h1>
+            <h2>النظام السيادي لمراقبة وتأمين الطبقة الفيزيائية للشبكات الضوئية</h2>
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 25px; border-radius: 20px; font-size: 15px; color: var(--text-main); font-weight: 700;">
+                المذكرة التقنية - نسخة 2026
+            </div>
+            
+            <div class="scroll-indicator">
+                <span class="material-symbols-rounded">mouse</span>
+                <span style="font-size: 14px;">اسحب للأسفل للاستكشاف</span>
+                <span class="material-symbols-rounded">keyboard_double_arrow_down</span>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">science</span> الأسس الفيزيائية للنظام</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card full-width">
+                    <p>يعتمد ابتكار <strong>HELE</strong> على مبدأ الاستشعار الضوئي الموزع. لا يتعامل النظام مع الألياف البصرية كوسط لنقل البيانات فحسب، بل يحول الكابل بالكامل إلى <span class="highlight">مصفوفة استشعار جيو-فيزيائية</span> ممتدة لآلاف الكيلومترات.</p>
+                    <p>من خلال تحليل ظاهرة <strong>"تشتت رايلي الخلفي" (Rayleigh Backscattering)</strong>، يقوم النظام برصد أدنى التغيرات في معامل الانكسار الناتجة عن الإجهاد الميكانيكي أو الاهتزازات الصوتية المحيطة بالكابل بدقة متناهية.</p>
+                    <ul class="bullet-list" style="margin-top: 20px;">
+                        <li><strong>تعديلات الطور الضوئي (Phase Modulation):</strong> لرصد الانحناءات الميكروية.</li>
+                        <li><strong>البصمات الترددية:</strong> لتمييز الاضطرابات الميكانيكية الخارجية.</li>
+                        <li><strong>تغيرات زمن الرحلة (ToF):</strong> لدراسة الانفعال الحراري للغلاف.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">admin_panel_settings</span> السيادة الرقمية (OSI Layer 1)</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card full-width">
+                    <span class="material-symbols-rounded card-icon">policy</span>
+                    <h3>خط الدفاع الفيزيائي الأول</h3>
+                    <p>تعتبر كابلات الألياف البصرية الشرايين المغذية للدولة. أي اختراق فيزيائي لهذه الطبقة يعني إمكانية الوصول غير المصرح به للبيانات أو تعطيل الخدمات الاستراتيجية. يوفر HELE نظاماً محلياً للمراقبة، مما يلغي الاعتماد على الحلول الأجنبية.</p>
+                    <p>يعمل النظام حصرياً في <strong>الطبقة الأولى (Layer 1)</strong> من نموذج الشبكات، مما يعني أنه يرصد التهديدات قبل وصولها إلى البرمجيات أو البروتوكولات الرقمية، مقدماً حماية لا يمكن تجاوزها برمجياً.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">trending_up</span> الجدوى الاقتصادية (OPEX & ROI)</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">savings</span>
+                    <h3>خفض النفقات التشغيلية (OPEX)</h3>
+                    <p>يقلل HELE من خسائر مؤسسات الاتصالات عبر التحول من <strong>"الصيانة التصحيحية"</strong> إلى <strong>"الصيانة التنبؤية"</strong>. يحدد النظام موقع الإجهاد الميكانيكي بدقة قبل تحوله إلى قطع فعلي، مما يقلل هدر الوقت لفرق الصيانة الميدانية ويحمي الأصول.</p>
+                </div>
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">account_balance</span>
+                    <h3>حماية الدخل القومي</h3>
+                    <p>استمرارية تدفق البيانات في قطاعات البنوك والطاقة تضمن استقرار النمو الاقتصادي وتفادي الخسائر الناتجة عن توقف المعاملات الرقمية، والتي تقدر بخسائر فادحة لكل ساعة انقطاع شامل (SLA Breaches).</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">memory</span> أنماط الرصد والتحليل المتقدمة</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">verified</span>
+                    <h3>النواة السيادية (Sovereign Core)</h3>
+                    <p>نمط المراقبة المستمرة لسلامة الربط الفيزيائي. يضمن ثبات الإشارة وعدم وجود أي تداخل خارجي، مخصص لخطوط الربط الاستراتيجية ومراكز البيانات الحكومية.</p>
+                </div>
+                
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">vibration</span>
+                    <h3>الرادار الجيوفيزيائي (Geo-Radar)</h3>
+                    <p>يحلل الموجات الصوتية المنتقلة عبر التربة. يمكنه التمييز بين المصادر المختلفة للاضطراب (آليات حفر ثقيلة مقابل ضجيج محيطي) بناءً على معالجة الطيف الترددي.</p>
+                </div>
+
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">shield</span>
+                    <h3>الدرع الميكروي (Micro-Shield)</h3>
+                    <p>يركز على رصد "الإجهاد الميكروي". يرصد محاولات التلاعب الدقيقة بجسم الكابل أو فتح غرف التوزيع عبر تغيرات ضئيلة في شدة الضوء تشير لخرق فيزيائي.</p>
+                </div>
+
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">router</span>
+                    <h3>نبض المؤسسات (Enterprise Pulse)</h3>
+                    <p>يراقب استقرار النبضات الضوئية وتأثير العوامل الميكانيكية الخارجية على سرعة انتقال البيانات واستقرار زمن الاستجابة (Jitter) لضمان جودة الخدمة (QoS) للشركات.</p>
+                </div>
+
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">thermostat</span>
+                    <h3>الانجراف الحراري (Thermal Drift)</h3>
+                    <p>تحليل تمدد الألياف الناتج عن التغيرات الحرارية. يساعد في تقييم تهالك الغلاف الخارجي وتفادي الأعطال الناتجة عن تمدد وتقلص المواد بسبب الظروف المناخية القاسية.</p>
+                </div>
+
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">vpn_key</span>
+                    <h3>التشفير الفيزيائي (PLKG)</h3>
+                    <p>استغلال العشوائية الفيزيائية للضجيج الضوئي لتوليد مفاتيح تشفير ديناميكية. يربط التشفير بالحالة الفيزيائية الفريدة للكابل (Physical Entropy) مانعاً الاستنساخ.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">location_searching</span> محدد الأعطال البصري المتقدم</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card full-width">
+                    <p>عوضاً عن أجهزة الـ OTDR التقليدية التي تتطلب فصل الخدمة، يقوم HELE بمراقبة الخط "حياً" (In-service Monitoring). عند حدوث قطع أو انفعال ميكانيكي حاد، يعالج النظام الفارق الزمني لعودة النبضة المرتدة لتحديد الإحداثيات الجغرافية للخلل فوراً.</p>
+                    <div class="formula-box">
+                        Distance (d) = (c / 2n) * Δt
+                        <div style="font-size: 13px; color: var(--text-sub); margin-top: 5px; font-family: 'Cairo', sans-serif;" dir="rtl">
+                            حيث (c) سرعة الضوء، (n) معامل الانكسار، و (Δt) فارق التوقيت للنبضة المرتدة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">domain</span> حزم الخدمات الاستراتيجية والتطبيقية</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">home</span>
+                    <h3>درع المنازل (Home Shield)</h3>
+                    <p>حماية الممتلكات الخاصة والمجمعات السكنية اعتماداً على فيزياء الضوء حصراً، مما يضمن <span class="highlight">خصوصية مطلقة (100%)</span> دون الحاجة لتركيب كاميرات. كما يوفر خاصية <strong>توقع الانقطاع</strong> لإبلاغ العميل بضعف الخط قبل انقطاعه الفعلي.</p>
+                </div>
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">fence</span>
+                    <h3>أمن المنشآت (Anti-Sabotage)</h3>
+                    <p>يعمل الكابل المدفون حول المنشآت الحساسة كـ <strong>جدار حسي غير مرئي (Perimeter Defense)</strong> يرصد محاولات التسلل أو الحفر العشوائي. مع توفير إنذار فوري لأي محاولة للعبث بخزائن التوزيع الأرضية.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">support_agent</span> مساعد التحليل الآلي والمعايرة</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">analytics</span>
+                    <h3>مساعد التحليل اللحظي (Diagnostic Assistant)</h3>
+                    <p>البيانات البصرية الخام معقدة وتحتاج لمهندس بصريات. يحل النظام هذه المشكلة عبر <strong>مساعد آلي مدمج في واجهة التطبيق</strong>، وظيفته ترجمة المخططات الفيزيائية فوراً إلى تقارير نصية وتوجيهات واضحة لفرق الصيانة.</p>
+                </div>
+                <div class="card">
+                    <span class="material-symbols-rounded card-icon">tune</span>
+                    <h3>المعايرة التكيفية (Adaptive Calibration)</h3>
+                    <p>يعمل المساعد على ضبط خوارزميات النظام لمعايرته مع البيئة المحيطة. فهو يتعرف على "البصمة الاهتزازية" المعتادة للموقع (كالقطارات أو المصانع) ويتجاهلها برمجياً لمنع الإنذارات الخاطئة.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">waves</span> الاستجابة الزلزالية والإنذار المبكر</h2>
+            </div>
+            <div class="grid-layout">
+                <div class="card full-width">
+                    <span class="material-symbols-rounded card-icon" style="color: var(--text-main);">emergency</span>
+                    <h3>مرصد الزلازل الاستراتيجي (Seismic Alert)</h3>
+                    <p>يحول نظام HELE شبكة الألياف البصرية الممتدة تحت الأرض إلى <strong>حساس زلزالي عملاق</strong> لا مثيل له. يعتمد النظام على رصد موجات الضغط الأولية السريعة <strong>(P-waves)</strong> التي تسبق الموجات التدميرية العنيفة <strong>(S-waves)</strong>.</p>
+                    <p>يتيح هذا التحليل الجيوفيزيائي الفوري توفير <strong>ثوانٍ أو دقائق ذهبية</strong> قبل وصول الهزة الأرضية الرئيسية. يمكن ربط مخرجات HELE آلياً بمنظومات الأمان العامة عبر بروتوكولات التحكم الصناعي (SCADA)، للقيام بإجراءات استباقية مثل:</p>
+                    <ul class="bullet-list" style="margin-top: 15px;">
+                        <li>الإغلاق الآلي لصمامات الغاز الرئيسية لتفادي الانفجارات والحرائق.</li>
+                        <li>إيقاف القطارات السريعة والمصاعد في المنشآت الحساسة.</li>
+                        <li>إطلاق صافرات الإنذار وإرسال إشعارات طارئة للمستشفيات وفرق الإنقاذ.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2><span class="material-symbols-rounded">help</span> أسئلة شائعة (الجدوى والأمان)</h2>
+            </div>
+            
+            <div class="grid-layout">
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        هل يعتمد التطبيق على خوادم خارجية، وكيف يتم تأمين التطبيق نفسه من الاختراق؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> نظام HELE مصمم بهيكلية المعالجة الطرفية (Edge Computing). معالجة الإشارات الفيزيائية تتم محلياً، بينما يعمل التطبيق كواجهة عرض آمنة. لا يتم رفع أي بيانات خام لجهات خارجية، مما يضمن سيادة البيانات ويمنع التجسس الشبكي.
+                    </div>
+                </div>
+
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        هل يتطلب تشغيل النظام حفر البنية التحتية وتغيير الكابلات الحالية؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> لا، النظام مصمم ليعمل على كابلات الألياف البصرية المتواجدة بالفعل باستخدام تقنية مضاعفة الطول الموجي. يتم الربط بنهاية الكابل ليتحول إلى حساس مستمر دون أي تكلفة حفر إضافية.
+                    </div>
+                </div>
+
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        هل ترصد الخوارزمية حركة المشي العادية للبشر، وكيف تتجنب الإنذارات الكاذبة؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> الخوارزمية <strong>لا تكترث لحركة المشي البشري العادية</strong>. النظام مصمم لفلترة الضجيج المحيطي الروتيني والتركيز حصرياً على <strong>الانفعالات الميكانيكية الحادة</strong> (كأعمال الحفر الثقيلة، التكسير، أو ثني الكابل الفعلي)، مما يقضي على الإنذارات الكاذبة تماماً.
+                    </div>
+                </div>
+
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        في حالة حدوث قطع، ما هي سرعة الاستجابة لمعالجة الحدث؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> تتم معالجة البيانات وتحديد إحداثيات الخلل <strong>في غضون بضع ثوانٍ</strong>. هذا التوقيت المنطقي يتناسب تماماً مع قدرات المعالجة الفعلية لأجهزة (ONT) الطرفية، ليُرسل بعدها إنذار حرج معزز بالموقع الجغرافي.
+                    </div>
+                </div>
+
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        كيف يمنع النظام محاولات تجاوز الخوارزمية (Bypassing) أو خداعها بنبضات مزيفة؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> يعتمد النظام على تحليل الخصائص الفيزيائية الحصرية للنبضة المرتدة وتوقيتها الدقيق (Optical Fingerprint). أي محاولة من المخترق لحقن ضوء خارجي أو تقليد الإشارة ستؤدي حتماً إلى عدم تطابق في الطور وتغير في معامل الانكسار، مما يُسجل فوراً كـ "اختراق أمني فيزيائي".
+                    </div>
+                </div>
+
+                <div class="card full-width qa-card">
+                    <div class="qa-question">
+                        <span class="material-symbols-rounded">help_outline</span>
+                        ماذا لو تم العبث بجهاز المعالجة (ONT) نفسه أو فصل الطاقة عنه لتعطيل الإنذار؟
+                    </div>
+                    <div class="qa-answer">
+                        <strong>الإجابة:</strong> يعمل النظام بمنطق الفشل الآمن (Fail-Safe). إذا تم تدمير جهاز الـ ONT أو فصل الطاقة عنه في محاولة يائسة للتهرب، فإن الانقطاع المفاجئ لتدفق النبضات الدورية يُسجل لدى المركز الرئيسي كحدث انقطاع حرج (Critical Outage) بصورة فورية، مما يجعل إخفاء عملية التخريب أمراً مستحيلاً هندسياً.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="conclusion">
+            <h3>HELE SYSTEM</h3>
+            <p>سيادة مطلقة، أمان فيزيائي، واستدامة اقتصادية. من الألياف الضوئية، نصنع درع المستقبل.</p>
+            <div class="copyright-tag">جميع الحقوق محفوظة للمبتكر مرحاب محمد هاشمي © 2026</div>
+        </section>
+
+    </div>
+
+    <script>
+        // 1. تحديث شريط التقدم العلوي
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        // 2. منع الزر الأيمن
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 3. منع اختصارات لوحة المفاتيح
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 73) return false; // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 67) return false; // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 74) return false; // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
+        };
+        
+        // 4. منع السحب
+        document.ondragstart = function() { return false; };
+    </script>
+</body>
+</html>
