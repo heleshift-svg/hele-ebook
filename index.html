@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MERHAB MOHAMED | Fiber Optic Technician, Developer, Author</title>
+<meta name="description" content="Senior fiber optic technician, Python and machine learning certified developer, and author of Blueprint, a book on home fiber.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;
+  --ink:#16170f;
+  --cream:#F4EFDF;
+  --cream-2:#E8E1CB;
+  --olive:#6B7B3A;
+  --olive-deep:#4A5628;
+  --olive-light:#A9B77A;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.6;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--olive-light);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.05}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:18px}
+h3{font-size:1.7rem;margin-bottom:8px}
+p{max-width:62ch}
+section{padding:96px 0}
+.dark{background:var(--black);color:var(--cream)}
+.olive{background:var(--olive-deep);color:var(--cream)}
+.lead{font-size:1.12rem;opacity:.9}
+
+/* the fiber rail: one light pulse travelling down the page */
+.rail{position:fixed;left:14px;top:0;bottom:0;width:2px;background:rgba(107,123,58,.45);z-index:20;pointer-events:none}
+.pulse{position:absolute;left:-2px;width:6px;height:56px;border-radius:3px;background:linear-gradient(var(--olive-light),transparent);box-shadow:0 0 14px var(--olive-light);top:0}
+
+/* nav */
+header{position:sticky;top:0;z-index:30;background:var(--black);color:var(--cream);border-bottom:1px solid #2a2d1c}
+nav{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.logo{font-family:var(--serif);font-size:1.5rem;text-decoration:none}
+nav ul{display:flex;gap:26px;list-style:none;font-size:.95rem}
+nav a{text-decoration:none;opacity:.85}
+nav a:hover{opacity:1;color:var(--olive-light)}
+
+/* hero */
+.hero{padding:84px 0 96px;overflow:hidden}
+.hero .wrap{display:block}
+.hero h1{font-size:clamp(3rem,10vw,7.4rem);letter-spacing:-.01em;margin-bottom:22px}
+.hero .tag{font-family:var(--serif);font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.15;color:var(--olive-light);max-width:24ch;margin-bottom:26px}
+.hero p{margin-bottom:34px}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-block;padding:14px 26px;text-decoration:none;font-weight:700;border-radius:999px;border:2px solid var(--olive-light);transition:background .2s,color .2s}
+.btn.fill{background:var(--olive-light);color:var(--black)}
+.btn.fill:hover{background:var(--cream);border-color:var(--cream)}
+.btn.line{color:var(--cream)}
+.btn.line:hover{background:var(--cream);color:var(--black);border-color:var(--cream)}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.facts{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
+.facts div{border-left:3px solid var(--olive);padding-left:14px}
+.facts strong{font-family:var(--serif);font-size:2.4rem;font-weight:400;display:block;line-height:1}
+.facts span{font-size:.9rem}
+.skills{display:grid;gap:26px}
+.skills h3{font-size:1.4rem;color:var(--olive-deep)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.tags li{background:var(--black);color:var(--cream);padding:5px 14px;border-radius:999px;font-size:.9rem}
+.skills .tags li.o{background:var(--olive)}
+
+/* work */
+.made{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:38px}
+.made div{border:1px solid #3a3e27;border-radius:4px 28px 4px 28px;padding:34px 30px}
+.made strong{font-family:var(--serif);font-size:4.5rem;font-weight:400;color:var(--olive-light);line-height:1;display:block}
+.made p{opacity:.85;margin-top:4px}
+
+/* book */
+.book-grid{display:block}
+.book-grid p{max-width:60ch}
+.book-grid .btn{margin-top:26px;background:var(--cream);color:var(--black);border-color:var(--cream)}
+.book-grid .btn:hover{background:var(--black);color:var(--cream);border-color:var(--black)}
+
+/* credentials */
+.cred-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;margin-top:38px}
+.cred{padding:32px 28px;border-radius:4px 28px 4px 28px;display:flex;flex-direction:column;gap:10px;grid-column:span 2}
+.cred h3{font-size:1.9rem;margin:0}
+.cred p{font-size:.98rem}
+.cred.main{grid-column:span 6;background:var(--black);color:var(--cream);display:grid;grid-template-columns:1fr 1.2fr;align-items:center;gap:30px;padding:44px 40px}
+.cred.main h3{font-size:clamp(2.1rem,4vw,3.1rem);line-height:1.05;margin-top:12px}
+.cred.c1{background:var(--olive-deep);color:var(--cream)}
+.cred.c2{background:var(--cream-2);border:2px solid var(--olive)}
+.cred.c3{background:var(--olive-light);color:var(--black)}
+.badge{display:inline-block;align-self:flex-start;border:1.5px solid currentColor;border-radius:999px;padding:3px 14px;font-size:.85rem;font-weight:700;margin-bottom:6px}
+
+/* local ai */
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+pre{background:#10120a;border:1px solid #3a3e27;border-radius:10px;padding:22px;font-size:.9rem;line-height:1.7;overflow-x:auto;color:var(--olive-light);font-family:ui-monospace,"SF Mono",Consolas,monospace}
+pre span{color:var(--cream)}
+
+/* contact */
+.contact h2{font-size:clamp(2.6rem,7vw,5rem)}
+.contact ul{list-style:none;margin-top:30px;display:grid;gap:10px;font-size:1.15rem}
+.contact a{color:var(--olive-deep);font-weight:700;text-underline-offset:5px}
+.contact .btn{text-decoration:none}
+.contact .btn.black{background:var(--black);color:var(--cream);border-color:var(--black)}
+.contact .btn.green{background:var(--olive-deep);color:var(--cream);border-color:var(--olive-deep)}
+.contact .btn:hover{background:var(--cream);color:var(--black)}
+footer{background:var(--black);color:var(--cream);padding:26px 0;font-size:.9rem;opacity:.9}
+
+@media (max-width:860px){
+  .about-grid,.ai-grid{grid-template-columns:1fr;gap:40px}
+  .made{grid-template-columns:1fr}
+  .cred-grid{grid-template-columns:1fr}
+  .cred,.cred.main{grid-column:auto}
+  .cred.main{grid-template-columns:1fr;padding:34px 28px}
+  .logo{font-size:1.15rem}
+  nav ul{gap:14px;font-size:.85rem}
+  nav ul li:nth-child(n+3){display:none}
+  .rail{display:none}
+  section{padding:72px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="rail" aria-hidden="true"><div class="pulse" id="pulse"></div></div>
+
+<header>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="logo" href="#top">MERHAB MOHAMED</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#book">Blueprint</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#ai">Local AI</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="dark hero">
+  <div class="wrap">
+    <div>
+      <h1>MERHAB MOHAMED</h1>
+      <p class="tag">I run fiber in the field and ship code from the desk.</p>
+      <p class="lead">Senior fiber optic technician, certified in Python and machine learning, building apps and websites with local AI models. Author of <i>Blueprint</i>, a book on home fiber.</p>
+      <div class="btns">
+        <a class="btn fill" href="#work">See my work</a>
+        <a class="btn line" href="#book">Read about Blueprint</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>Two trades, one habit of precision</h2>
+      <p>Fiber work taught me to measure twice, document everything and respect the details nobody sees once the cable is in the wall. I bring that habit to software: small, tested pieces that connect cleanly.</p>
+      <p style="margin-top:14px">I build apps and websites, deploy them on GitHub and Cloudflare, and use local AI models to move faster without sending my work to anyone else’s servers.</p>
+      <div class="facts">
+        <div><strong>3</strong><span>apps built</span></div>
+        <div><strong>5</strong><span>websites deployed</span></div>
+        <div><strong>1</strong><span>book published</span></div>
+      </div>
+    </div>
+    <div class="skills">
+      <div>
+        <h3>Fiber optics</h3>
+        <ul class="tags"><li>FTTH installation</li><li>Home fiber design</li><li>Technical writing</li></ul>
+      </div>
+      <div>
+        <h3>Code and web</h3>
+        <ul class="tags"><li>Python</li><li>HTML and CSS</li><li>Vibe coding</li><li>GitHub</li><li>Cloudflare</li></ul>
+      </div>
+      <div>
+        <h3>AI</h3>
+        <ul class="tags"><li class="o">Ollama</li><li class="o">Local models</li><li class="o">Machine learning</li></ul>
+      </div>
+      <div>
+        <h3>Language</h3>
+        <ul class="tags"><li>English B2</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="dark">
+  <div class="wrap">
+    <h2>Apps and websites</h2>
+    <p class="lead">I design, build and deploy my own apps and websites, distributed across GitHub and Cloudflare.</p>
+    <div class="made">
+      <div><strong>3</strong><h3>Apps</h3><p>Applications I built and deployed myself, from idea to release.</p></div>
+      <div><strong>5</strong><h3>Websites</h3><p>Websites I designed, coded and published online.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book" class="olive">
+  <div class="wrap book-grid">
+    <div>
+      <h2>Blueprint</h2>
+      <p class="lead">I wrote Blueprint for people who want fiber optic done properly at home. It comes from years of field work: how to plan the route, choose the right materials and avoid the mistakes that cost time later.</p>
+      <p style="margin-top:14px">It is the same approach as my code: clear, practical and built to last.</p>
+      <a class="btn" href="#contact">Get the book</a>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="wrap">
+    <h2>Credentials</h2>
+    <p>Hands-on experience first, backed by structured training.</p>
+    <div class="cred-grid">
+      <article class="cred main">
+        <div><span class="badge">Field expertise</span><h3>Senior technician in fiber optic</h3></div>
+        <p>Years of work on fiber optic networks, and author of Blueprint, a book on home fiber.</p>
+      </article>
+      <article class="cred c1"><span class="badge">10 months</span><h3>Python programming</h3><p>Qualifying certificate.</p></article>
+      <article class="cred c2"><span class="badge">6 months</span><h3>Machine learning</h3><p>Qualifying certificate.</p></article>
+      <article class="cred c3"><span class="badge">Level B2</span><h3>English</h3><p>Upper-intermediate proficiency.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL AI -->
+<section id="ai" class="dark">
+  <div class="wrap ai-grid">
+    <div>
+      <h2>Building with local AI</h2>
+      <p class="lead">I run models on my own machine with Ollama. My code and notes stay private, it works offline, and I decide which model fits each task.</p>
+      <p style="margin-top:14px">For HTML projects I vibe code: I describe the page, a local model drafts it, and I review, fix and ship every line myself.</p>
+    </div>
+    <pre aria-label="Example Ollama commands"><span>$</span> ollama pull llama3
+<span>$</span> ollama run llama3
+&gt;&gt;&gt; Write a responsive HTML hero section
+    in olive green, black and cream.</pre>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let’s work together</h2>
+    <p>Fiber projects, web apps or a conversation about local AI: send me a message.</p>
+    <div class="btns" style="margin-top:28px">
+      <a class="btn black" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=Hmimh42@gmail.com" target="_blank" rel="noopener">Email me</a>
+      <a class="btn green" href="https://wa.me/213562521388" target="_blank" rel="noopener">WhatsApp me</a>
+    </div>
+    <ul>
+      <li>Email: <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=Hmimh42@gmail.com" target="_blank" rel="noopener">Hmimh42@gmail.com</a></li>
+      <li>WhatsApp: <a href="https://wa.me/213562521388" target="_blank" rel="noopener">+213 562521388</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">©️ <span id="year">2026</span> MERHAB MOHAMED. Built by hand with HTML and local AI.</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var pulse = document.getElementById('pulse');
+  function move(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? window.scrollY / max : 0;
+    pulse.style.top = (p * (window.innerHeight - 56)) + 'px';
+  }
+  window.addEventListener('scroll', move, {passive:true});
+  window.addEventListener('resize', move);
+  move();
+</script>
+</body>
+</html>
